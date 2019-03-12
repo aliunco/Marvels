@@ -33,6 +33,7 @@ struct Image: Codable {
     var path: String?
     var type: String?
     private enum CodingKeys: String, CodingKey {
+        case path
         case type = "extension"
     }
 }

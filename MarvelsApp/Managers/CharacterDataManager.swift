@@ -10,18 +10,18 @@ import Foundation
 
 struct CharacterDataManager {
     
-    static func getCharacters(target: Any?, name: String? = nil, limit: Int? = nil, offset: Int? = nil) -> Future<Response<Character>> {
+    static func getCharacters(target: LoadingPresenter?, name: String? = nil, limit: Int? = nil, offset: Int? = nil) -> Future<Response<Character>> {
         return RequestManager.shared.fetch(
             method: .get,
             target: target,
             path: MarvelApi.characters(name: name, limit: limit, offset: offset).path,
-            params: MarvelApi.characters(name: name, limit: offset, offset: offset).parameters,
+            params: MarvelApi.characters(name: name, limit: limit, offset: offset).parameters,
             type: .foreground,
             modelType: Response<Character>.self
         )
     }
     
-    static func getCharacter(target: Any?, characterID: String) -> Future<Response<Character>> {
+    static func getCharacter(target: LoadingPresenter?, characterID: String) -> Future<Response<Character>> {
         return RequestManager.shared.fetch(
             method: .get,
             target: target,

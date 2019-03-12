@@ -47,7 +47,7 @@ struct RequestManager {
     
     func fetch<T> (
         method: HTTPMethod,
-        target: Any?,
+        target: LoadingPresenter?,
         path: String,
         params: Parameters?,
         type: ApiRequestExecutionType,
@@ -61,7 +61,7 @@ struct RequestManager {
             return promise
         }
         
-        self.preRequestActions(type: type, url: requestUrl, params: params)
+        self.preRequestActions(target: target, type: type, url: requestUrl, params: params)
         
         // ---- preparing the http request -----
         var request: URLRequest?
@@ -89,7 +89,7 @@ struct RequestManager {
         }
         printRequest(url: requestUrl, params: params)
         RequestManager.lastTask = RequestManager.sharedSession.dataTask(with: httpRequest) { (data, response, error) in
-            self.afterRequestActions(type: type, data: data, response: response, error: error)
+            self.afterRequestActions(target: target, type: type, data: data, response: response, error: error)
             if let error = error {
                 promise.reject(with: error)
                 return
@@ -131,24 +131,28 @@ struct RequestManager {
         return promise
     }
     
-    private func preRequestActions(type: ApiRequestExecutionType, url: String, params: Parameters?) {
+    private func preRequestActions(target: LoadingPresenter?, type: ApiRequestExecutionType, url: String, params: Parameters?) {
         if(type == .container || type == .foreground) {
             loadingIndicator(present: true)
+            target?.presentLoadingView(visible: true)
         }
     }
     
-    private func afterRequestActions(type: ApiRequestExecutionType, data: Data?, response: URLResponse?, error: Error?) {
+    private func afterRequestActions(target: LoadingPresenter?, type: ApiRequestExecutionType, data: Data?, response: URLResponse?, error: Error?) {
         guard let response = response as? HTTPURLResponse else {
             loadingIndicator(present: false)
+            target?.presentLoadingView(visible: false)
             return
         }
         if response.statusCode == 200 {
             if (type == .foreground) {
                 loadingIndicator(present: false)
+                target?.presentLoadingView(visible: false)
             }
         } else {
             if(type == .container || type == .foreground) {
                 loadingIndicator(present: false)
+                target?.presentLoadingView(visible: false)
             }
         }
         self.printResponse(url: response.url?.absoluteString ?? "", data: data)

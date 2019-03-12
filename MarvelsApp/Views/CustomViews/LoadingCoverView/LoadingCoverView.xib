@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LoadingCoverView" customModule="MarvelsApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="364" height="443"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpv-HK-Bz9">
+                    <rect key="frame" x="0.0" y="0.0" width="364" height="443"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D1L-4Z-5SV">
+                            <rect key="frame" x="137" y="176.5" width="90" height="90"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="55D-gx-zdI"/>
+                                <constraint firstAttribute="width" secondItem="D1L-4Z-5SV" secondAttribute="height" multiplier="1:1" id="gPg-Lg-X2x"/>
+                            </constraints>
+                        </view>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9bH-iG-s14">
+                            <rect key="frame" x="172" y="211.5" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="D1L-4Z-5SV" firstAttribute="centerX" secondItem="bpv-HK-Bz9" secondAttribute="centerX" id="MXB-Ue-3rW"/>
+                        <constraint firstItem="9bH-iG-s14" firstAttribute="centerY" secondItem="D1L-4Z-5SV" secondAttribute="centerY" id="hlh-Ze-vJ4"/>
+                        <constraint firstItem="D1L-4Z-5SV" firstAttribute="centerY" secondItem="bpv-HK-Bz9" secondAttribute="centerY" id="r9d-ZN-KvZ"/>
+                        <constraint firstItem="9bH-iG-s14" firstAttribute="centerX" secondItem="D1L-4Z-5SV" secondAttribute="centerX" id="zNS-Pu-w9Q"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="bpv-HK-Bz9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="0v8-oe-UZl"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bpv-HK-Bz9" secondAttribute="trailing" id="26K-xM-Qlr"/>
+                <constraint firstItem="bpv-HK-Bz9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="2S6-J5-GUQ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="bpv-HK-Bz9" secondAttribute="bottom" id="89V-cj-JLK"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="backgroundView" destination="bpv-HK-Bz9" id="XNi-g4-tJp"/>
+                <outlet property="containerView" destination="D1L-4Z-5SV" id="e2C-Mt-5sK"/>
+                <outlet property="loadingIndicator" destination="9bH-iG-s14" id="KgV-Fm-mu2"/>
+            </connections>
+            <point key="canvasLocation" x="-190.40000000000001" y="-65.217391304347828"/>
+        </view>
+    </objects>
+</document>
