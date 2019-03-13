@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol CharactersDatasourceDelegate:class, LoadingPresenter {
+protocol CharactersDatasourceDelegate: class, LoadingPresenter {
     func listHasBeenUpdated(newItems: [Character])
     func startLoading()
 }
@@ -18,7 +18,7 @@ final class CharactersDatasource: NSObject {
     
     var items: [Character] = []
     var isInProgress = false
-    var delegate: CharactersDatasourceDelegate?
+    weak var delegate: CharactersDatasourceDelegate?
     private let itemsPerPage = 20
     var query: String? {
         didSet {
@@ -51,7 +51,9 @@ final class CharactersDatasource: NSObject {
                     }
                 case .error(let error):
                     print(error)
-                    self.delegate?.listHasBeenUpdated(newItems: [])
+                    DispatchQueue.main.async {
+                        self.delegate?.listHasBeenUpdated(newItems: [])
+                    }
                 }
         }
     }

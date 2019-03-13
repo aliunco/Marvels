@@ -45,7 +45,7 @@ extension Image {
     }
 }
 
-struct ResourceList<T: Codable> : Codable {
+struct ResourceList<T: Codable> : Codable where T: NameDescribable {
     var available: Int?
     var returned: Int? //The number of resources returned in this resource list (up to 20).
     var collectionURIString: String?
@@ -57,7 +57,7 @@ struct ResourceList<T: Codable> : Codable {
     }
 }
 
-struct Character: Codable {
+struct Character: Codable, NameDescribable {
     var id: Int?
     var name: String?
     var description: String?
@@ -77,7 +77,7 @@ struct Character: Codable {
     }
 }
 
-struct Comic: Codable {
+struct Comic: Codable, NameDescribable, SimplePresentable {
     var id: Int?
     var digitalId: Int?
     var title: String?
@@ -111,28 +111,29 @@ struct Comic: Codable {
     }
 }
 
-struct Story: Codable {
+struct Story: Codable, NameDescribable, SimplePresentable {
     var id: Int?
     var title: String?
     var description: String?
-    var resourceURIString: String?
+//    var resourceURIString: String?
     var type: String?
-    var modified: Date?
+//    var modified: Date?
     var thumbnail: Image?
-    var comics: ResourceList<Comic>?
-    var series: ResourceList<Series>?
-    var events: ResourceList<Event>?
-    var characters: ResourceList<Character>?
-    var creators: ResourceList<Creator>?
-    var resourceURI: URL?{ return convertURL(urlString: resourceURIString) }
+//    var comics: ResourceList<Comic>?
+//    var series: ResourceList<Series>?
+//    var events: ResourceList<Event>?
+//    var characters: ResourceList<Character>?
+//    var creators: ResourceList<Creator>?
+//    var resourceURI: URL?{ return convertURL(urlString: resourceURIString) }
     private enum CodingKeys: String, CodingKey {
-        case id, title, description, type, modified,
-            thumbnail, comics, series, events, characters, creators
-        case resourceURIString = "resourceURI"
+        case id, title, description, type, thumbnail
+//        modified,
+//        comics, series, events, characters, creators
+//        case resourceURIString = "resourceURI"
     }
 }
 
-struct Event: Codable {
+struct Event: Codable, NameDescribable, SimplePresentable {
     var id: Int?
     var title: String?
     var description: String?
@@ -156,16 +157,16 @@ struct Event: Codable {
     }
 }
 
-struct Series: Codable {
+struct Series: Codable, NameDescribable, SimplePresentable {
     var id: Int?
     var title: String?
     var description: String?
     var resourceURIString: String?
     var resourceURI: URL? { return convertURL(urlString: resourceURIString) }
     var urls: [URLObj]?
-    var modified: Date?
-    var startYear: Date?
-    var endYear: Date?
+//    var modified: Date?
+//    var startYear: Date?
+//    var endYear: Date?
     var rating: String?
     var thumbnail: Image?
     var comics: ResourceList<Comic>?
@@ -175,13 +176,14 @@ struct Series: Codable {
     var events: ResourceList<Event>?
     
     private enum CodingKeys: String, CodingKey {
-        case id, title, description, urls, modified, startYear, endYear,
+        case id, title, description, urls,
         thumbnail, comics, stories, events, characters, creators
+//        , modified, startYear, endYear,
         case resourceURIString = "resourceURI"
     }
 }
 
-struct Creator: Codable {
+struct Creator: Codable, NameDescribable, SimplePresentable {
     var id:Int?
     var firstName: String?
     var middleName: String?
@@ -205,4 +207,16 @@ struct Creator: Codable {
         thumbnail, comics, stories, events, characters, creators, series
         case resourceURIString = "resourceURI"
     }
+    
+    //simple presentor
+    var title: String? {
+        set {}
+        get { return fullName }
+    }
+}
+
+
+protocol SimplePresentable {
+    var title: String? { get set }
+    var thumbnail: Image? { set get }
 }

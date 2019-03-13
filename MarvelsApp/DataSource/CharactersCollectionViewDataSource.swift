@@ -1,5 +1,5 @@
 //
-//  CharacterCollectionViewDataSource.swift
+//  CharactersCollectionViewDataSource.swift
 //  MarvelsApp
 //
 //  Created by aliunco on 3/12/19.
@@ -12,10 +12,7 @@ extension CharactersDatasource: UICollectionViewDataSource {
     
     func register(collectionView: UICollectionView) {
         collectionView.dataSource = self
-        collectionView.register(
-            CharacterCollectionViewCell.loadNib(),
-            forCellWithReuseIdentifier: CharacterCollectionViewCell.nibName
-        )
+        collectionView.register(CharacterCollectionViewCell.self)
         collectionView.register(
             CharactersLodingFooterView.nibView,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
@@ -37,10 +34,8 @@ extension CharactersDatasource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCollectionViewCell.nibName, for: indexPath) as? CharacterCollectionViewCell else { return UICollectionViewCell () }
+        let cell = collectionView.dequeue(CharacterCollectionViewCell.self, for: indexPath)
         cell.character = items[indexPath.row]
-        
         return cell
     }
     

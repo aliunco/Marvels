@@ -15,7 +15,7 @@ protocol NibLoader {
 
 extension NibLoader where Self: NameDescribable  {
     static var nibName: String {
-        return self.typeName.components(separatedBy: ".")[0]
+        return self.typeName
     }
 }
 

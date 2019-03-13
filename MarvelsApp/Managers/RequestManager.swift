@@ -62,7 +62,6 @@ struct RequestManager {
         }
         
         self.preRequestActions(target: target, type: type, url: requestUrl, params: params)
-        
         // ---- preparing the http request -----
         var request: URLRequest?
         switch method {
@@ -186,8 +185,8 @@ struct RequestManager {
     
     private func printResponse(url: String, data: Data?) {
         if let data = data, let utf8Text = String(data: data, encoding: .utf8) {
-//            print("------------ Start response for : \(url)")
-//            print("DataResponse: \(utf8Text)")
+            print("------------ Start response for : \(url)")
+            print("DataResponse: \(utf8Text)")
         }
     }
     

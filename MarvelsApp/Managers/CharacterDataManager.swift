@@ -31,4 +31,49 @@ struct CharacterDataManager {
             modelType: Response<Character>.self
         )
     }
+    
+    static func getComics(target: LoadingPresenter?, characterID: String) -> Future<Response<Comic>> {
+        return RequestManager.shared.fetch(
+            method: .get,
+            target: target,
+            path: MarvelApi.characterComics(characterID: characterID, limit: 3).path,
+            params: MarvelApi.characterComics(characterID: characterID, limit: 3).parameters,
+            type: .background,
+            modelType: Response<Comic>.self
+        )
+    }
+    
+    static func getSeries(target: LoadingPresenter?, characterID: String) -> Future<Response<Series>> {
+        return RequestManager.shared.fetch(
+            method: .get,
+            target: target,
+            path: MarvelApi.characterSeries(characterID: characterID, limit: 3).path,
+            params: MarvelApi.characterSeries(characterID: characterID, limit: 3).parameters,
+            type: .background,
+            modelType: Response<Series>.self
+        )
+    }
+    
+    static func getEvents(target: LoadingPresenter?, characterID: String) -> Future<Response<Event>> {
+        return RequestManager.shared.fetch(
+            method: .get,
+            target: target,
+            path: MarvelApi.characterEvents(characterID: characterID, limit: 3).path,
+            params: MarvelApi.characterEvents(characterID: characterID, limit: 3).parameters,
+            type: .background,
+            modelType: Response<Event>.self
+        )
+    }
+    
+    static func getStories(target: LoadingPresenter?, characterID: String) -> Future<Response<Story>> {
+        return RequestManager.shared.fetch(
+            method: .get,
+            target: target,
+            path: MarvelApi.characterStories(characterID: characterID, limit: 3).path,
+            params: MarvelApi.characterStories(characterID: characterID, limit: 3).parameters,
+            type: .background,
+            modelType: Response<Story>.self
+        )
+    }
+
 }

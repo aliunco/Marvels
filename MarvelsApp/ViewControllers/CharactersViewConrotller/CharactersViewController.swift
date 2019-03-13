@@ -24,13 +24,21 @@ class CharactersViewController: BaseViewController {
         collectionView.collectionViewLayout = GridCollectionViewFlowLayout()
         collectionView.delegate = self
     }
+    @IBAction func textFieldEditingChange(_ sender: UITextField) {
+        dataSource.query = sender.text
+    }
 }
 
 
 extension CharactersViewController: CharactersDatasourceDelegate {
     func listHasBeenUpdated(newItems: [Character]) {
         
-        if collectionView.visibleCells.count < dataSource.items.count {
+        if collectionView.visibleCells.count <= dataSource.items.count {
+            collectionView.reloadData()
+            return
+        }
+        
+        if newItems.count < 2 {
             collectionView.reloadData()
             return
         }
@@ -55,7 +63,11 @@ extension CharactersViewController: CharactersDatasourceDelegate {
 extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if dataSource.items.count > indexPath.row, let characterID = dataSource.items[indexPath.row].id,
+            let detailView = CharacterDetailViewController.loadFromNib() {
+            detailView.characterID = "\(characterID)"
+            self.navigationController?.pushViewController(detailView, animated: true)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

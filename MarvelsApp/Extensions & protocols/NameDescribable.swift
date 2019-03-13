@@ -15,11 +15,11 @@ protocol NameDescribable {
 
 extension NameDescribable {
     var typeName: String {
-        return String(describing: type(of: self))
+        return String(describing: type(of: self)).components(separatedBy: ".")[0]
     }
     
     static var typeName: String {
-        return String(describing: self)
+        return String(describing: self).components(separatedBy: ".")[0]
     }
 }
 
