@@ -9,46 +9,48 @@
 import Foundation
 import UIKit
 
-protocol ImageLoader {
-    func setImage(url: URL, placeholer: UIImage)
+
+public struct ImageLoaderWrapper<Base> {
+    public let base: Base
+    public init(_ base: Base) {
+        self.base = base
+    }
 }
 
-extension ImageLoader {
-    private func downloadImage(url: URL) -> Future<UIImage?> {
-        let promise = Promise<UIImage?>()
-        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 10)
-        RequestManager.sharedSession.dataTask(with: urlRequest) { (data, response, error) in
+public protocol ImageLoaderCompatible { }
+extension ImageLoaderCompatible {
+    public var il: ImageLoaderWrapper<Self> {
+        get { return ImageLoaderWrapper(self) }
+        set {}
+    }
+}
+
+extension ImageLoaderWrapper {
+    private func downloadImage(url: URL, callBack:@escaping ((UIImage) -> Void)) -> URLSessionDataTask {
+        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 30)
+        let task = RequestManager.sharedSession.dataTask(with: urlRequest) { (data, response, error) in
             guard let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
                 let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
                 let data = data, error == nil,
                 let image = UIImage(data: data)
-                else {
-                    promise.reject(with: error ?? RequestError.emptyResponse)
-                    return
-            }
-            promise.resolve(with: image)
-        }.resume()
-        return promise
+                else { return }
+            callBack(image)
+        }
+        task.resume()
+        return task
     }
 }
 
-
-extension ImageLoader where Self: UIImageView {
-    func setImage(url: URL, placeholer: UIImage) {
-        self.image = placeholer
-        downloadImage(url: url)
-            .observe { result in
-                switch result {
-                case .value(let image):
-                    DispatchQueue.main.async() {
-                        self.image = image
-                    }
-                case .error(let error):
-                    print(error)
-                }
+extension ImageLoaderWrapper where Base: UIImageView {
+    @discardableResult func setImage(url: URL, placeholer: UIImage) -> URLSessionDataTask {
+        self.base.image = placeholer
+        return downloadImage(url: url) { (image) in
+            DispatchQueue.main.async {
+                self.base.image = image
+            }
         }
     }
 }
 
 
-extension UIImageView: ImageLoader {}
+extension UIImageView: ImageLoaderCompatible { }

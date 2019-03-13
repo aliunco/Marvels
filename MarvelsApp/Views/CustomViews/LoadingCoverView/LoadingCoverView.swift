@@ -19,6 +19,7 @@ class LoadingCoverView: BaseCustomView {
     }()
     
     override func setup() {
+        self.backgroundColor = .clear
         self.loadingIndicator.startAnimating()
         self.containerView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
         self.containerView.alpha = 0.8

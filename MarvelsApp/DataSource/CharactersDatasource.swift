@@ -10,12 +10,14 @@ import Foundation
 import UIKit
 
 protocol CharactersDatasourceDelegate:class, LoadingPresenter {
-    func listHasBeenUpdated()
+    func listHasBeenUpdated(newItems: [Character])
+    func startLoading()
 }
 
 final class CharactersDatasource: NSObject {
     
     var items: [Character] = []
+    var isInProgress = false
     var delegate: CharactersDatasourceDelegate?
     private let itemsPerPage = 20
     var query: String? {
@@ -28,21 +30,28 @@ final class CharactersDatasource: NSObject {
     func resetAndClear() {
         DispatchQueue.main.async {
             self.items.removeAll()
-            self.delegate?.listHasBeenUpdated()
+            self.delegate?.listHasBeenUpdated(newItems: [])
         }
     }
     
     func getMoreItems() {
+        if isInProgress { return }
+        isInProgress = true
+        
+        DispatchQueue.main.async { self.delegate?.startLoading() }
         CharacterDataManager.getCharacters(target: delegate, name: query, limit: itemsPerPage, offset: self.items.count)
             .observe { result in
+                self.isInProgress = false
                 switch result{
                 case .value(let characters):
                     DispatchQueue.main.async {
-                        self.items.append(contentsOf: characters.data?.results ?? [])
-                        self.delegate?.listHasBeenUpdated()
+                        let newItems = characters.data?.results ?? []
+                        self.items.append(contentsOf: newItems)
+                        self.delegate?.listHasBeenUpdated(newItems: newItems)
                     }
                 case .error(let error):
                     print(error)
+                    self.delegate?.listHasBeenUpdated(newItems: [])
                 }
         }
     }

@@ -16,13 +16,15 @@ class CharacterCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var imageCoverView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
+    private var downloadingImageTask: URLSessionDataTask?
     
     var character: Character? {
         didSet {
+            downloadingImageTask?.cancel()
             if let marvelCharacter = character {
                 // Setting a remote image
                 if let url = marvelCharacter.thumbnail?.getUrl() {
-                    imageView.setImage(url: url, placeholer: UIImage(named: "placeholder")!)
+                    self.downloadingImageTask = imageView.il.setImage(url: url, placeholer: UIImage(named: "placeholder")!)
                 }
                 titleLabel.text = marvelCharacter.name
             }

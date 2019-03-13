@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C2223842238CB98009064C9 /* GridCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2223832238CB98009064C9 /* GridCollectionViewLayout.swift */; };
+		1C2223872238D971009064C9 /* BaseNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2223862238D971009064C9 /* BaseNavigationViewController.swift */; };
+		1C2223892238DA0D009064C9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2223882238DA0D009064C9 /* UIColor.swift */; };
 		1C2D9B0D22364E0200CCAD15 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D9B0C22364E0200CCAD15 /* Response.swift */; };
 		1C2D9B0F22365C5F00CCAD15 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D9B0E22365C5F00CCAD15 /* Entity.swift */; };
 		1C2D9B1122368A7600CCAD15 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D9B1022368A7600CCAD15 /* String.swift */; };
@@ -39,9 +42,14 @@
 		1CE9202D2237C3E9007C46AD /* BaseCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE9202C2237C3E9007C46AD /* BaseCustomView.swift */; };
 		1CE9202F2237C4EC007C46AD /* LoadingCoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CE9202E2237C4EC007C46AD /* LoadingCoverView.xib */; };
 		1CE920312237DD7D007C46AD /* CharacterCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE920302237DD7D007C46AD /* CharacterCollectionViewDataSource.swift */; };
+		1CE9203622380D30007C46AD /* CharactersLodingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE9203422380D30007C46AD /* CharactersLodingFooterView.swift */; };
+		1CE9203722380D30007C46AD /* CharactersLodingFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CE9203522380D30007C46AD /* CharactersLodingFooterView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C2223832238CB98009064C9 /* GridCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewLayout.swift; sourceTree = "<group>"; };
+		1C2223862238D971009064C9 /* BaseNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationViewController.swift; sourceTree = "<group>"; };
+		1C2223882238DA0D009064C9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		1C2D9B0C22364E0200CCAD15 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		1C2D9B0E22365C5F00CCAD15 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		1C2D9B1022368A7600CCAD15 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -76,6 +84,8 @@
 		1CE9202C2237C3E9007C46AD /* BaseCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCustomView.swift; sourceTree = "<group>"; };
 		1CE9202E2237C4EC007C46AD /* LoadingCoverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCoverView.xib; sourceTree = "<group>"; };
 		1CE920302237DD7D007C46AD /* CharacterCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		1CE9203422380D30007C46AD /* CharactersLodingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersLodingFooterView.swift; sourceTree = "<group>"; };
+		1CE9203522380D30007C46AD /* CharactersLodingFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharactersLodingFooterView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C2223852238D956009064C9 /* NavigationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1C2223862238D971009064C9 /* BaseNavigationViewController.swift */,
+			);
+			path = NavigationViewController;
+			sourceTree = "<group>";
+		};
 		1CAB1AC32236FCE10044BE90 /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +179,7 @@
 				1C2D9B1622369A5300CCAD15 /* Dictionary.swift */,
 				1CE9201A2237AA9D007C46AD /* ImageLoader.swift */,
 				1CE920202237C241007C46AD /* LoadingPresenter.swift */,
+				1C2223882238DA0D009064C9 /* UIColor.swift */,
 			);
 			path = "Extensions & protocols";
 			sourceTree = "<group>";
@@ -222,6 +241,8 @@
 		1CE9200E22379916007C46AD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1C2223852238D956009064C9 /* NavigationViewController */,
+				1CE9203222380CDF007C46AD /* CollectionFooterView */,
 				1CE920222237C306007C46AD /* CustomViews */,
 				1CE9201222379B81007C46AD /* CollectionViewCell */,
 				1CE9200F2237991D007C46AD /* ViewLayouts */,
@@ -233,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				1CE920102237994F007C46AD /* SlidingMenuLayout.swift */,
+				1C2223832238CB98009064C9 /* GridCollectionViewLayout.swift */,
 			);
 			path = ViewLayouts;
 			sourceTree = "<group>";
@@ -271,6 +293,23 @@
 				1CE9202E2237C4EC007C46AD /* LoadingCoverView.xib */,
 			);
 			path = LoadingCoverView;
+			sourceTree = "<group>";
+		};
+		1CE9203222380CDF007C46AD /* CollectionFooterView */ = {
+			isa = PBXGroup;
+			children = (
+				1CE9203322380CFC007C46AD /* CharactersLodingFooterView */,
+			);
+			path = CollectionFooterView;
+			sourceTree = "<group>";
+		};
+		1CE9203322380CFC007C46AD /* CharactersLodingFooterView */ = {
+			isa = PBXGroup;
+			children = (
+				1CE9203422380D30007C46AD /* CharactersLodingFooterView.swift */,
+				1CE9203522380D30007C46AD /* CharactersLodingFooterView.xib */,
+			);
+			path = CharactersLodingFooterView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +370,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CE9203722380D30007C46AD /* CharactersLodingFooterView.xib in Resources */,
 				1CE920192237A02A007C46AD /* CharacterCollectionViewCell.xib in Resources */,
 				1CE9200C2237929B007C46AD /* CharactersViewController.xib in Resources */,
 				1CE9202F2237C4EC007C46AD /* LoadingCoverView.xib in Resources */,
@@ -349,6 +389,7 @@
 				1CE920312237DD7D007C46AD /* CharacterCollectionViewDataSource.swift in Sources */,
 				1CE920112237994F007C46AD /* SlidingMenuLayout.swift in Sources */,
 				1CAB1AC22236FC9D0044BE90 /* PersistHero.swift in Sources */,
+				1C2223872238D971009064C9 /* BaseNavigationViewController.swift in Sources */,
 				1CAB1AC82236FCF60044BE90 /* DefaultStorable.swift in Sources */,
 				1C2D9B0D22364E0200CCAD15 /* Response.swift in Sources */,
 				1CDD26322235D843000D7ED0 /* NibLoader.swift in Sources */,
@@ -359,12 +400,14 @@
 				1CE9200822378F8E007C46AD /* BaseViewController.swift in Sources */,
 				1CDD262E2235CDF6000D7ED0 /* AppUtility.swift in Sources */,
 				1C2D9B192236B86F00CCAD15 /* CharacterDataManager.swift in Sources */,
+				1C2223842238CB98009064C9 /* GridCollectionViewLayout.swift in Sources */,
 				1CE9202D2237C3E9007C46AD /* BaseCustomView.swift in Sources */,
 				1C2D9B1522368E9700CCAD15 /* APIManager.swift in Sources */,
 				1C2D9B1722369A5300CCAD15 /* Dictionary.swift in Sources */,
 				1CDD26382235E488000D7ED0 /* Promise.swift in Sources */,
 				1CDD262B2235BF21000D7ED0 /* RequestManager.swift in Sources */,
 				1CAB1AC72236FCF60044BE90 /* Default.swift in Sources */,
+				1C2223892238DA0D009064C9 /* UIColor.swift in Sources */,
 				1CE9201B2237AA9D007C46AD /* ImageLoader.swift in Sources */,
 				1C2D9B0F22365C5F00CCAD15 /* Entity.swift in Sources */,
 				1CE9200B2237929B007C46AD /* CharactersViewController.swift in Sources */,
@@ -372,6 +415,7 @@
 				1CAB1AC92236FCF60044BE90 /* DefaultStorableCodable.swift in Sources */,
 				1CDD26302235D05B000D7ED0 /* NameDescribable.swift in Sources */,
 				1CDD26142235B8C2000D7ED0 /* AppDelegate.swift in Sources */,
+				1CE9203622380D30007C46AD /* CharactersLodingFooterView.swift in Sources */,
 				1CE920212237C241007C46AD /* LoadingPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

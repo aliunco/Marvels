@@ -12,11 +12,20 @@ extension CharactersDatasource: UICollectionViewDataSource {
     
     func register(collectionView: UICollectionView) {
         collectionView.dataSource = self
-        collectionView.collectionViewLayout = SlidingMenuLayout()
         collectionView.register(
             CharacterCollectionViewCell.loadNib(),
             forCellWithReuseIdentifier: CharacterCollectionViewCell.nibName
         )
+        collectionView.register(
+            CharactersLodingFooterView.nibView,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: "FooterView"
+        )
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "FooterView", for: indexPath)
+        return footerView
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -34,6 +43,5 @@ extension CharactersDatasource: UICollectionViewDataSource {
         
         return cell
     }
-    
     
 }

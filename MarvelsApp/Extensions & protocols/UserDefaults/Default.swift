@@ -15,11 +15,7 @@ public final class Default<Base> {
     }
 }
 
-public protocol DefaultCompatible {
-    associatedtype CompatibleType
-    var df: CompatibleType { get }
-}
-
+public protocol DefaultCompatible {}
 public extension DefaultCompatible {
     public var df: Default<Self> {
         return Default(self)

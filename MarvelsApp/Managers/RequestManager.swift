@@ -186,8 +186,8 @@ struct RequestManager {
     
     private func printResponse(url: String, data: Data?) {
         if let data = data, let utf8Text = String(data: data, encoding: .utf8) {
-            print("------------ Start response for : \(url)")
-            print("DataResponse: \(utf8Text)")
+//            print("------------ Start response for : \(url)")
+//            print("DataResponse: \(utf8Text)")
         }
     }
     

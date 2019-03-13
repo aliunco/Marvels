@@ -21,8 +21,12 @@ extension NibLoader where Self: NameDescribable  {
 
 extension NibLoader where Self: UIView {
     
+    static var nibView: UINib? {
+        return UINib(nibName: nibName, bundle: nil)
+    }
+    
     internal static func viewFromNib() -> Self? {
-        let view = UINib(nibName: nibName, bundle: nil).instantiate(withOwner: nil, options: nil)[0]
+        let view = nibView?.instantiate(withOwner: nil, options: nil)[0]
         return view as? Self
     }
     

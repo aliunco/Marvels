@@ -16,7 +16,7 @@ struct CharacterDataManager {
             target: target,
             path: MarvelApi.characters(name: name, limit: limit, offset: offset).path,
             params: MarvelApi.characters(name: name, limit: limit, offset: offset).parameters,
-            type: .foreground,
+            type: .background,
             modelType: Response<Character>.self
         )
     }
