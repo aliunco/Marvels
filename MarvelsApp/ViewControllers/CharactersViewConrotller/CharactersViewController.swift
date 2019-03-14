@@ -13,6 +13,8 @@ class CharactersViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     private var dataSource = CharactersDatasource()
+    private var selectedCell: CharacterCollectionViewCell?
+    private var customInteractor: CustomInteractor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +25,39 @@ class CharactersViewController: BaseViewController {
         dataSource.getMoreItems()
         collectionView.collectionViewLayout = GridCollectionViewFlowLayout()
         collectionView.delegate = self
+        
+        self.navigationController?.delegate = self
     }
     @IBAction func textFieldEditingChange(_ sender: UITextField) {
         dataSource.query = sender.text
     }
 }
 
+
+//custom transition animation
+//TODO: refactor this code to be more reuseable for other views
+extension CharactersViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        guard let selectedImageFrame = self.selectedCell?.imageView.frame else { return nil }
+        guard let selectedImageView = self.selectedCell?.imageView else { return nil }
+        
+        let a = self.selectedCell?.convert(selectedImageFrame, to: collectionView)
+        let selectedFrame = collectionView.convert(a!, to: collectionView.superview!)
+        switch operation {
+        case .push:
+            self.customInteractor = CustomInteractor(attachTo: toVC)
+            return CustomAnimator(duration: TimeInterval(UINavigationController.hideShowBarDuration), isPresenting: true, originFrame: selectedFrame, image: selectedImageView.image)
+        default:
+            return CustomAnimator(duration: TimeInterval(UINavigationController.hideShowBarDuration), isPresenting: false, originFrame: selectedFrame, image: selectedImageView.image)
+        }
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        guard let ci = customInteractor else { return nil }
+        return ci.transitionInProgress ? customInteractor : nil
+    }
+}
 
 extension CharactersViewController: CharactersDatasourceDelegate {
     func listHasBeenUpdated(newItems: [Character]) {
@@ -63,8 +92,10 @@ extension CharactersViewController: CharactersDatasourceDelegate {
 extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedCell = collectionView.cellForItem(at: indexPath) as? CharacterCollectionViewCell
         if dataSource.items.count > indexPath.row, let characterID = dataSource.items[indexPath.row].id,
             let detailView = CharacterDetailViewController.loadFromNib() {
+
             detailView.characterID = "\(characterID)"
             self.navigationController?.pushViewController(detailView, animated: true)
         }

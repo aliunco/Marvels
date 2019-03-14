@@ -13,7 +13,7 @@ class CharacterCollectionViewCell: BaseCollectionViewCell {
     static let SlidingCellFeatureHeight: CGFloat = 280
     static let SlidingCellCollapsedHeight: CGFloat = 100
 
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet private weak var imageCoverView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     private var downloadingImageTask: URLSessionDataTask?

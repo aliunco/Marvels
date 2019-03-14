@@ -55,4 +55,10 @@ class CharacterInfoResourceListTableViewCell: BaseTableViewCell, UICollectionVie
         return cell
     }
     
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.collectionView.visibleCells.forEach { $0.prepareForReuse() }
+    }
+    
 }

@@ -29,4 +29,9 @@ class CharacterInfoResouseListItemCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resourceImageView.image = nil
+    }
+    
 }

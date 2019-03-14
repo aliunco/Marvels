@@ -11,6 +11,9 @@ import Foundation
 struct CharacterDataManager {
     
     static func getCharacters(target: LoadingPresenter?, name: String? = nil, limit: Int? = nil, offset: Int? = nil) -> Future<Response<Character>> {
+        
+        //cancel previous request
+        RequestManager.lastTask?.cancel()
         return RequestManager.shared.fetch(
             method: .get,
             target: target,

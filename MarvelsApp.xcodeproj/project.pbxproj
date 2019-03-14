@@ -34,6 +34,8 @@
 		1CAB1AC92236FCF60044BE90 /* DefaultStorableCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAB1AC62236FCF60044BE90 /* DefaultStorableCodable.swift */; };
 		1CB8D6552239418000959C5D /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB8D6542239418000959C5D /* UITableView.swift */; };
 		1CB8D65722398E0A00959C5D /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB8D65622398E0A00959C5D /* UICollectionView.swift */; };
+		1CDBF25E223A721400178EA4 /* CustomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDBF25D223A721400178EA4 /* CustomAnimator.swift */; };
+		1CDBF260223A8BBE00178EA4 /* CustomInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDBF25F223A8BBE00178EA4 /* CustomInteractor.swift */; };
 		1CDD26142235B8C2000D7ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDD26132235B8C2000D7ED0 /* AppDelegate.swift */; };
 		1CDD261B2235B8C4000D7ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CDD261A2235B8C4000D7ED0 /* Assets.xcassets */; };
 		1CDD261E2235B8C4000D7ED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CDD261C2235B8C4000D7ED0 /* LaunchScreen.storyboard */; };
@@ -88,6 +90,8 @@
 		1CAB1AC62236FCF60044BE90 /* DefaultStorableCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultStorableCodable.swift; sourceTree = "<group>"; };
 		1CB8D6542239418000959C5D /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		1CB8D65622398E0A00959C5D /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		1CDBF25D223A721400178EA4 /* CustomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimator.swift; sourceTree = "<group>"; };
+		1CDBF25F223A8BBE00178EA4 /* CustomInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractor.swift; sourceTree = "<group>"; };
 		1CDD26102235B8C2000D7ED0 /* MarvelsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CDD26132235B8C2000D7ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CDD261A2235B8C4000D7ED0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -197,6 +201,15 @@
 				1CAB1AC62236FCF60044BE90 /* DefaultStorableCodable.swift */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		1CDBF25C223A71CE00178EA4 /* TransitionAniamtion */ = {
+			isa = PBXGroup;
+			children = (
+				1CDBF25D223A721400178EA4 /* CustomAnimator.swift */,
+				1CDBF25F223A8BBE00178EA4 /* CustomInteractor.swift */,
+			);
+			path = TransitionAniamtion;
 			sourceTree = "<group>";
 		};
 		1CDD26072235B8C2000D7ED0 = {
@@ -328,6 +341,7 @@
 		1CE9200E22379916007C46AD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1CDBF25C223A71CE00178EA4 /* TransitionAniamtion */,
 				1C22238F2238E789009064C9 /* TableViewCell */,
 				1C2223852238D956009064C9 /* NavigationViewController */,
 				1CE9203222380CDF007C46AD /* CollectionFooterView */,
@@ -497,6 +511,7 @@
 				1CB8D6552239418000959C5D /* UITableView.swift in Sources */,
 				1C2D9B1122368A7600CCAD15 /* String.swift in Sources */,
 				1CE9200822378F8E007C46AD /* BaseViewController.swift in Sources */,
+				1CDBF25E223A721400178EA4 /* CustomAnimator.swift in Sources */,
 				1CDD262E2235CDF6000D7ED0 /* AppUtility.swift in Sources */,
 				1C2223A722391382009064C9 /* CharacterDataSource.swift in Sources */,
 				1C2D9B192236B86F00CCAD15 /* CharacterDataManager.swift in Sources */,
@@ -520,6 +535,7 @@
 				1CE9203622380D30007C46AD /* CharactersLodingFooterView.swift in Sources */,
 				1C22239D2238EF1E009064C9 /* CharacterInfoResourceListTableViewCell.swift in Sources */,
 				1CB8D65722398E0A00959C5D /* UICollectionView.swift in Sources */,
+				1CDBF260223A8BBE00178EA4 /* CustomInteractor.swift in Sources */,
 				1CE920212237C241007C46AD /* LoadingPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

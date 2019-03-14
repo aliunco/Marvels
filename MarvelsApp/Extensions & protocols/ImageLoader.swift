@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+let imageCache = NSCache<AnyObject, AnyObject>()
 
 public struct ImageLoaderWrapper<Base> {
     public let base: Base
@@ -26,7 +27,13 @@ extension ImageLoaderCompatible {
 }
 
 extension ImageLoaderWrapper {
-    private func downloadImage(url: URL, callBack:@escaping ((UIImage) -> Void)) -> URLSessionDataTask {
+    private func downloadImage(url: URL, callBack:@escaping ((UIImage) -> Void)) -> URLSessionDataTask? {
+        
+        if let imageFromCache = imageCache.object(forKey: url.absoluteString as AnyObject) as? UIImage {
+            callBack(imageFromCache)
+            return nil
+        }
+        
         let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 30)
         let task = RequestManager.sharedSession.dataTask(with: urlRequest) { (data, response, error) in
             guard let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
@@ -34,6 +41,7 @@ extension ImageLoaderWrapper {
                 let data = data, error == nil,
                 let image = UIImage(data: data)
                 else { return }
+            imageCache.setObject(image, forKey: url.absoluteString as AnyObject)
             callBack(image)
         }
         task.resume()
@@ -42,7 +50,7 @@ extension ImageLoaderWrapper {
 }
 
 extension ImageLoaderWrapper where Base: UIImageView {
-    @discardableResult func setImage(url: URL, placeholer: UIImage) -> URLSessionDataTask {
+    @discardableResult func setImage(url: URL, placeholer: UIImage) -> URLSessionDataTask? {
         self.base.image = placeholer
         return downloadImage(url: url) { (image) in
             DispatchQueue.main.async {

@@ -26,7 +26,7 @@
                     <rect key="frame" x="0.0" y="192" width="375" height="475"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oAi-Ns-Peh">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oAi-Ns-Peh">
                     <rect key="frame" x="0.0" y="64" width="375" height="128"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="128" id="aRL-2Y-xUW"/>
