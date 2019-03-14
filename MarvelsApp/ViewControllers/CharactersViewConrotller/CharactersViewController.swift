@@ -8,13 +8,14 @@
 
 import UIKit
 
-
 class CharactersViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     private var dataSource = CharactersDatasource()
     private var selectedCell: CharacterCollectionViewCell?
     private var customInteractor: CustomInteractor?
+    @IBOutlet weak private var favCharacterWrapperView: UIView!
+    @IBOutlet weak private var favCharacterImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +26,38 @@ class CharactersViewController: BaseViewController {
         dataSource.getMoreItems()
         collectionView.collectionViewLayout = GridCollectionViewFlowLayout()
         collectionView.delegate = self
-        
         self.navigationController?.delegate = self
+        
+        favCharacterWrapperView.layer.cornerRadius = 50
+        favCharacterWrapperView.clipsToBounds = true
+        if Character.shared == nil {
+            favCharacterWrapperView.isHidden = true
+        }
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let thumbnail = Character.shared?.thumbnail?.getUrl() {
+            self.favCharacterWrapperView.isHidden = false
+            self.favCharacterImageView.il.setImage(url: thumbnail, placeholer: #imageLiteral(resourceName: "placeholder"))
+        }
+    }
+    
     @IBAction func textFieldEditingChange(_ sender: UITextField) {
         dataSource.query = sender.text
+    }
+    
+    @IBAction func favCharacterButtonTapped(_ sender: Any) {
+        guard let characterID = Character.shared?.id else { return }
+        self.gotoDetail(characterID: characterID)
+    }
+    
+    
+    private func gotoDetail(characterID: Int) {
+        guard let detailView = CharacterDetailViewController.loadFromNib() else { return }
+        detailView.characterID = "\(characterID)"
+        self.navigationController?.pushViewController(detailView, animated: true)
     }
 }
 
@@ -93,11 +121,8 @@ extension CharactersViewController: UICollectionViewDelegate, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = collectionView.cellForItem(at: indexPath) as? CharacterCollectionViewCell
-        if dataSource.items.count > indexPath.row, let characterID = dataSource.items[indexPath.row].id,
-            let detailView = CharacterDetailViewController.loadFromNib() {
-
-            detailView.characterID = "\(characterID)"
-            self.navigationController?.pushViewController(detailView, animated: true)
+        if dataSource.items.count > indexPath.row, let characterID = dataSource.items[indexPath.row].id {
+            gotoDetail(characterID: characterID)
         }
     }
     
